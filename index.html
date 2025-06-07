@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kenapa Kita Gak Bisa Bersama</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Quicksand', sans-serif;
+      height: 100%;
+      background: #1a1a1a;
+      overflow: hidden;
+      color: #e0e0e0;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://i.ibb.co/ZXFvXbR/sad-rain.gif') center center / cover no-repeat;
+      filter: brightness(0.3) blur(3px);
+      z-index: -1;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      padding: 3rem;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 12px;
+      margin-top: 10vh;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    h1 {
+      font-size: 1.7rem;
+      margin-bottom: 2rem;
+    }
+
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    button {
+      background-color: #3a3a80;
+      border: none;
+      padding: 0.8rem 1.2rem;
+      border-radius: 6px;
+      color: #e0e0e0;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #5050a0;
+      transform: scale(1.03);
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #aaa;
+      margin-top: 2rem;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="scene">
+    <h1 id="question">Kamu mencintainya?</h1>
+    <div class="btn-group" id="choices">
+      <button onclick="jawabCinta(false)">Tidak</button>
+      <button onclick="jawabCinta(true)">Iya</button>
+    </div>
+    <footer>&copy; 2025 Zass Project 🥀</footer>
+  </div>
+
+  <script>
+    const scene = document.getElementById('scene');
+    const question = document.getElementById('question');
+    const choices = document.getElementById('choices');
+
+    function jawabCinta(jawab) {
+      if (!jawab) {
+        question.innerText = "Wajib cinta, bro. Kamu kira ini latihan?";
+        choices.innerHTML = `<button onclick="mulaiUlang()">Oke... ulangi nasib</button>`;
+      } else {
+        question.innerText = "Lantas... kenapa kamu gak bersamanya?";
+        choices.innerHTML = `
+          <button onclick="pilihAlasan('lain')">Dia mencintai orang lain</button>
+          <button onclick="pilihAlasan('aku')">Dia gak mencintaiku</button>
+          <button onclick="pilihAlasan('dimensi')">Kami beda dimensi</button>
+          <button onclick="pilihAlasan('sama')">Kami udah bersama</button>
+          <button onclick="pilihAlasan('keburu')">Aku keburu ngechat "selamat ulang tahun" ke doi yang salah</button>
+        `;
+      }
+    }
+
+    function pilihAlasan(alasan) {
+      let jawaban = "";
+      let lanjut = "";
+
+      switch (alasan) {
+        case 'lain':
+          jawaban = "Dia bahagia sama orang lain, kamu bahagia lihat story-nya. 😔";
+          lanjut = "Akhirnya kamu sadar... cinta tidak harus memiliki.";
+          break;
+        case 'aku':
+          jawaban = "Sakit ya? Doi bilang 'aku cuma anggap kamu temen' 😭";
+          lanjut = "Kamu pun jadi Ketua Genk Friendzone 2025.";
+          break;
+        case 'dimensi':
+          jawaban = "Lah... kamu pacaran sama karakter 2D lagi? 😶";
+          lanjut = "Tapi tenang... waifu gak pernah ninggalin kamu.";
+          break;
+        case 'sama':
+          jawaban = "Wah! 😍 Tapi kok kamu masih buka halaman sedih ini?";
+          lanjut = "Jangan-jangan... kamu lagi pura-pura bahagia.";
+          break;
+        case 'keburu':
+          jawaban = "Skill typo fatal: kamu ngechat mantan pas jam 12 teng. 😭";
+          lanjut = "Sejak itu, kamu dirawat di RS Kesedihan Akut.";
+          break;
+      }
+
+      question.innerText = jawaban;
+      choices.innerHTML = `
+        <button onclick="tampilkanEnding('${lanjut}')">Lanjutkan...</button>
+      `;
+    }
+
+    function tampilkanEnding(text) {
+      question.innerText = text;
+      choices.innerHTML = `
+        <button onclick="akhirTragis()">Sudahi semuanya...</button>
+      `;
+    }
+
+    function akhirTragis() {
+      question.innerText = "Dan akhirnya kamu menghapus chat-nya...\n\nPadahal belum tentu dia baca.";
+      choices.innerHTML = `<button onclick="mulaiUlang()">Ulangi penderitaan</button>`;
+    }
+
+    function mulaiUlang() {
+      question.innerText = "Kamu mencintainya?";
+      choices.innerHTML = `
+        <button onclick="jawabCinta(false)">Tidak</button>
+        <button onclick="jawabCinta(true)">Iya</button>
+      `;
+    }
+  </script>
+</body>
+</html>
